@@ -10,6 +10,9 @@ namespace CPM
     {
         static void Main(string[] args)
         {
+            Graph graph = new Graph();
+            graph.CreateGaph();
+            Console.Read();
         }
     }
 }

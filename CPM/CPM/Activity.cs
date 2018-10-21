@@ -8,8 +8,7 @@ namespace CPM
 {
     public class Activity
     {
-        private static int _globalID;
-        public int ID { get; }
+        public int ID { get; private set; }
         public double EarliestPossibleOccurrence { get; private set; }
         public double LatestPossibleOccurrence { get; private set; }
         public double Reserve { get; private set; }
@@ -17,10 +16,9 @@ namespace CPM
         public IList<Incident> Outgoing { get; private set; }
         
 
-        Activity(List<Incident> incoming, List<Incident> outgoing)
+        Activity(int id, List<Incident> incoming, List<Incident> outgoing)
         {
-            _globalID++;
-            this.ID = _globalID;
+            ID = id;
             Incoming = new List<Incident>(incoming);
             Outgoing = new List<Incident>(outgoing);
         }
@@ -43,7 +41,7 @@ namespace CPM
                 foreach(var incident in Incoming)
                 {
                     var current = EarliestPossibleOccurrence + incident.Duration;
-                    max = current > max ? current : max;
+                  //  max = current > max ? current : max;
                 }
             }
 
@@ -57,8 +55,8 @@ namespace CPM
             {
                 foreach (var incident in Outgoing)
                 {
-                    var current = LatestPossibleOccurrence - incident.Duration;
-                    min = current < min ? current : min;
+                   // var current = LatestPossibleOccurrence - incident.Duration;
+                    //min = current < min ? current : min;
                 }
                 LatestPossibleOccurrence = min;
             }

@@ -26,10 +26,5 @@ namespace CPM
             //}
 
         }
-
-        public void CreateDiagram()
-        {
-            
-        }
     }
 }

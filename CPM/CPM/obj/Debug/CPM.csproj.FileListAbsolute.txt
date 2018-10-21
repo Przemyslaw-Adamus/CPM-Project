@@ -1,0 +1,9 @@
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\bin\Debug\CPM.exe.config
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\bin\Debug\CPM.exe
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\bin\Debug\CPM.pdb
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\obj\Debug\CPM.csprojResolveAssemblyReference.cache
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\obj\Debug\CPM.csproj.CoreCompileInputs.cache
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\obj\Debug\CPM.exe
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\obj\Debug\CPM.pdb
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\bin\Debug\CsvHelper.dll
+C:\Users\przem\Desktop\CPM-Project\CPM\CPM\bin\Debug\CsvHelper.xml
