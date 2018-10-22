@@ -1,13 +1,11 @@
 ﻿using CsvHelper.Configuration;
-//using System.Globalization;
-using CsvHelper;
 using System;
 
 namespace CPM
 {
-    internal class IncidentMap : ClassMap<Incident>
+    internal class ActivityMap : ClassMap<Activity>
     {
-        public IncidentMap()
+        public ActivityMap()
         {
             Map(m => m.ID).ConvertUsing(row => Int32.Parse(row.GetField<String>(0)));
             Map(m => m.Duration).ConvertUsing(row => Double.Parse(row.GetField<String>(1)));

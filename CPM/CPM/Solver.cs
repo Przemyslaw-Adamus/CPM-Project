@@ -8,7 +8,7 @@ namespace CPM
 {
     class Solver
     {
-        Solver(IList<Activity> Activities, IList<Incident> Incidents)
+        Solver()
         {
             //foreach (var activity in activities)
             //{
