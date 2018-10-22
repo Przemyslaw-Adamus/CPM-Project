@@ -10,14 +10,19 @@ namespace CPM
     {
         static void Main(string[] args)
         {
-            Graph graph = new Graph();
+            var graph = new Graph();
+            var solver = new Solver();
 
-            graph.CreateGaphIncidients();
+            graph.CreateGraphIncidients();
+            solver.LoadGraph(graph);
+            solver.CalculateGraphValues();
             graph.ShowGraph();
+            var cp = solver.FindIncidentsCriticalPath();
+            solver.ShowCriticalPath(cp);
 
-            graph = new Graph();
-        
-            graph.CreateGaphActivities();
+            //graph = new Graph();
+
+            //graph.CreateGraphActivities();
             //graph.ShowGraph();
 
             //int choose;

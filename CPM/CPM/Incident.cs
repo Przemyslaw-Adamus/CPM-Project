@@ -26,25 +26,25 @@ namespace CPM
             Outgoing = new List<Activity>();
         }
 
-        public bool IsLast()
-        {
-            return Incoming.Any();
-        }
-
-        public bool IsFirst()
+        public bool IsNotLast()
         {
             return Outgoing.Any();
+        }
+
+        public bool IsNotFirst()
+        {
+            return Incoming.Any();
         }
         
         public void CalculateEarliestPossibleOccurence()
         {
             double max = 0;
-            if (!IsFirst())
+            if (IsNotFirst())
             {
-                foreach(var incident in Incoming)
+                foreach(var activity in Incoming)
                 {
-                    var current = EarliestPossibleOccurrence + incident.Duration;
-                  //  max = current > max ? current : max;
+                    var current = activity.Parent.EarliestPossibleOccurrence + activity.Duration;
+                    max = current > max ? current : max;
                 }
             }
 
@@ -53,18 +53,17 @@ namespace CPM
 
         public void CalculateLatestPossibleOccurence()
         {
-            double min = 0;
-            if (!IsLast())
+            LatestPossibleOccurrence = EarliestPossibleOccurrence;
+            if (IsNotLast())
             {
-                foreach (var incident in Outgoing)
+                double min = Outgoing.Min(i => i.Children.LatestPossibleOccurrence);
+                foreach (var activity in Outgoing)
                 {
-                   // var current = LatestPossibleOccurrence - incident.Duration;
-                    //min = current < min ? current : min;
+                    var current = activity.Children.LatestPossibleOccurrence - activity.Duration;
+                    min = current < min ? current : min;
                 }
                 LatestPossibleOccurrence = min;
             }
-
-            LatestPossibleOccurrence = EarliestPossibleOccurrence;
         }
 
         public void CalculateReserve()

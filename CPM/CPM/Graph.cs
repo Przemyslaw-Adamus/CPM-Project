@@ -17,13 +17,13 @@ namespace CPM
             Activities = new List<Activity>();
         }
 
-        public void CreateGaphIncidients()
+        public void CreateGraphIncidients()
         {
             LoadActivities();
             CreateIncidents();
         }
 
-        public void CreateGaphActivities()
+        public void CreateGraphActivities()
         {
             LoadActivitiesModeActivities();
             Console.WriteLine("ACTIVITIES");
