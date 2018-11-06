@@ -15,11 +15,26 @@ namespace CPM
 
         public int IdParent;
         public int IdChildren;
-        public int IdPreviousIDs;
+        public int[] IdPrevious;
 
         public Activity()
         {
 
+        }
+
+        public Activity(int id, double duration, int idParent, int idChildren)
+        {
+            this.ID = id;
+            this.Duration = duration;
+            this.IdParent = idParent;
+            this.IdChildren = idChildren;
+        }
+
+        public Activity(int id, double duration, int[] idPrevious)
+        {
+            this.ID = id;
+            this.Duration = duration;
+            this.IdPrevious = idPrevious;
         }
 
     }

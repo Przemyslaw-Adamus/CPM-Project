@@ -14,7 +14,6 @@ namespace CPM
         public double Reserve { get; private set; }
         public IList<Activity> Incoming { get; private set; }
         public IList<Activity> Outgoing { get; private set; }
-        
 
         public Incident(int id)
         {

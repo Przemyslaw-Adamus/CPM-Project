@@ -26,15 +26,6 @@ namespace CPM
         public void CreateGraphActivities()
         {
             LoadActivitiesModeActivities();
-            Console.WriteLine("ACTIVITIES");
-            foreach (var act in Activities)
-            {
-                Console.WriteLine("_______________________");
-                Console.WriteLine("ID \t \t" + act.ID);
-                Console.WriteLine("Duration \t" + act.Duration);
-                Console.WriteLine("IdPreviousIDs \t" + act.IdPreviousIDs);
-                Console.WriteLine("_______________________");
-            }
             CreateIncidentsModeActivities();
         }
 
@@ -77,7 +68,7 @@ namespace CPM
 
         }
 
-        private void CreateIncidents()
+        public void CreateIncidents()
         {
             //---------------------------------------------
             Incident item;
@@ -145,7 +136,8 @@ namespace CPM
             }
 
         }
-        private void CreateIncidentsModeActivities()
+
+        public void CreateIncidentsModeActivities()
         {
 
         }

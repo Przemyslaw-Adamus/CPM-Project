@@ -10,7 +10,7 @@ namespace CPM
         {
             Map(m => m.ID).Name("ID").Index(0);
             Map(m => m.Duration).Name("Time").Index(0);
-            Map(m => m.IdPreviousIDs).Name("PreviousIDs").Index(0);
+            //Map(m => m.IdPreviousIDs).Name("PreviousIDs").Index(0);
         }
     }
 }

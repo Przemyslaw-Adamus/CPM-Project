@@ -10,40 +10,85 @@ namespace CPM
     {
         static void Main(string[] args)
         {
+
             var graph = new Graph();
             var solver = new Solver();
+            String choose = "-1";
+            while(choose != "0"){
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("                  MENU                   ");
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("1. Preceding activities");
+                Console.WriteLine("2. Preceding activities");
+                Console.WriteLine("0. Close");
+                Console.Write("Your choose: ");
+                choose = Console.ReadLine();
 
-            graph.CreateGraphIncidients();
-            solver.LoadGraph(graph);
-            solver.CalculateGraphValues();
-            graph.ShowGraph();
-            var cp = solver.FindIncidentsCriticalPath();
-            solver.ShowCriticalPath(cp);
+                if(choose != "0" && choose != "1" && choose != "2")
+                {
+                    choose = "-1";
+                    Console.WriteLine("You have chosen the wrong option.Make your selection again. Press ENTER");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    switch (choose)
+                    {
+                        case "1":
+                            graph.CreateGraphIncidients();
+                            solver.LoadGraph(graph);
+                            solver.CalculateGraphValues();
+                            graph.ShowGraph();
+                            var cp = solver.FindIncidentsCriticalPath();
+                            solver.ShowCriticalPath(cp);
+                            Console.WriteLine("Press ENTER");
+                            Console.ReadLine();
+                            break;
+                        case "2":
+                            int[] perviousActivity;
+                            int countPreviousActivity;
+                            double duration;
+                            int countActivities = 0;
 
-            //graph = new Graph();
+                            Console.WriteLine("Give the number of activities: ");
+                            countActivities = int.Parse(Console.ReadLine());
+                            for(int i = 0; i < countActivities; i++)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Enter the duration of this activity: ");
+                                duration = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Give the number of preceding activities has this action: ");
+                                countPreviousActivity = int.Parse(Console.ReadLine());
+                                perviousActivity = new int[countPreviousActivity];
+                                for(int j = 0; j < countPreviousActivity; j++)
+                                {
+                                    Console.Write(j + " - ");
+                                    perviousActivity[j] = int.Parse(Console.ReadLine());
+                                }
+                                graph.Activities.Add(new Activity(i,duration,perviousActivity));
+                                Console.WriteLine("Activity number " + i + " has been added. Press ENTER");
+                                Console.ReadLine();
+                            }
+                            graph.CreateIncidentsModeActivities();
+                            solver.LoadGraph(graph);
+                            solver.CalculateGraphValues();
+                            graph.ShowGraph();
+                            var cpp = solver.FindIncidentsCriticalPath();
+                            solver.ShowCriticalPath(cpp);
+                            Console.WriteLine("Press ENTER");
+                            Console.ReadLine();
+                            break;
+                        case "3":
+                            Console.ReadLine();
+                            break;
+                        case "0":
+                            break;
+                    }
+                }
 
-            //graph.CreateGraphActivities();
-            //graph.ShowGraph();
-
-            //int choose;
-            //Console.WriteLine("1. \t MODE 1");
-            //Console.WriteLine("2. \t MODE 2");
-            //Console.WriteLine("0. \t EXIT");
-            //Console.Write("CHOOSE THE MODE: ");
-            //choose = Console.Read();
-            //switch (choose)
-            //{
-            //    case 1:
-            //        graph.CreateGaphIncidients();
-            //        graph.ShowGraph();
-            //        break;
-            //    case 2:
-            //        graph.CreateGaphActivities();
-            //        graph.ShowGraph();
-            //        break;
-            //    case 0:
-            //        break;
-            //}
+                Console.Clear();
+            }
+            Console.WriteLine("END");
             Console.ReadLine();
         }
     }
