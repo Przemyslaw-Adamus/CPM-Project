@@ -124,6 +124,8 @@ namespace CPM
             //---------------------------------------------
         }
 
+
+
         private void LoadActivitiesModeActivities()
         {
             using (var streamReader = File.OpenText("Graf1.2.csv"))
@@ -161,7 +163,7 @@ namespace CPM
         public void NewActivity(Activity activity)
         {
             Activities.Add(activity);
-            if (activity.IdPrevious.Length == 0 || !Activities.Contains(activity))
+            if (activity.IdPrevious.Length == 0 || !Activities.Contains(activity)) // if Acitivities nie zawiera poprzednikow
             {
                 var incident = new Incident();
                 Incidents.Add(incident);

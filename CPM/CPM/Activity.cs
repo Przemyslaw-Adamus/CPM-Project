@@ -43,14 +43,17 @@ namespace CPM
             this.IdPrevious = idPrevious;
         }
 
-        public Activity(int id, double OptimisticTime, double PessimisticTime, double ProbableTime)
+        public Activity(int id, double OptimisticTime, double PessimisticTime, double ProbableTime, int idParent, int idChildren)
         {
             this.ID = id;
             this.OptimisticTime = OptimisticTime;
             this.PessimisticTime = PessimisticTime;
             this.ProbableTime = ProbableTime;
+            this.IdChildren = idChildren;
+            this.IdParent = idParent;
             this.Duration = CalculateDuration();
             this.Variance = CalculateVariance();
+
         }
 
         public double CalculateVariance()
