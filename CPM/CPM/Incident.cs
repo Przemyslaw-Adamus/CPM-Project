@@ -8,12 +8,24 @@ namespace CPM
 {
     public class Incident
     {
+        public static int GlobalID { get; private set; }
         public int ID { get; private set; }
         public double EarliestPossibleOccurrence { get; private set; }
         public double LatestPossibleOccurrence { get; private set; }
         public double Reserve { get; private set; }
         public IList<Activity> Incoming { get; private set; }
         public IList<Activity> Outgoing { get; private set; }
+
+        public Incident()
+        {
+            ID = GlobalID;
+            GlobalID++;
+            EarliestPossibleOccurrence = 0.0;
+            LatestPossibleOccurrence = 0.0;
+            Reserve = 0.0;
+            Incoming = new List<Activity>();
+            Outgoing = new List<Activity>();
+        }
 
         public Incident(int id)
         {

@@ -139,7 +139,35 @@ namespace CPM
 
         public void CreateIncidentsModeActivities()
         {
+            foreach(var incident in Incidents)
+            {
+                foreach(var activity in Activities)
+                {
+                    if (activity.IdPrevious == null)
+                        activity.Children = Incidents.Single(i => i.ID == 0);
+                    else
+                    {
+                        foreach(var id in activity.IdPrevious)
+                        {
+                            var actual = Activities.Single(a => a.ID == id);
+                            activity.Parent.Incoming.Add(actual);
+                            actual.Children = actual.Parent;
+                        }
+                    }
+                }
+            }
+        }
 
+        public void NewActivity(Activity activity)
+        {
+            Activities.Add(activity);
+            if (activity.IdPrevious.Length == 0 || !Activities.Contains(activity))
+            {
+                var incident = new Incident();
+                Incidents.Add(incident);
+                incident.Outgoing.Add(activity);
+                activity.Parent = incident;
+            }
         }
 
     }

@@ -73,5 +73,10 @@ namespace CPM
             }
             Console.WriteLine(sb);
         }
+        public void CalculatePERT()
+        {
+
+        }
+
     }
 }

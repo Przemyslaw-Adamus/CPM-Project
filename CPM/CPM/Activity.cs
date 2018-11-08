@@ -17,6 +17,12 @@ namespace CPM
         public int IdChildren;
         public int[] IdPrevious;
 
+        public double OptimisticTime { get; set; }
+        public double PessimisticTime { get; set; }
+        public double ProbableTime { get; set; }
+        public double Variance { get; set; }
+
+
         public Activity()
         {
 
@@ -37,5 +43,26 @@ namespace CPM
             this.IdPrevious = idPrevious;
         }
 
+        public Activity(int id, double OptimisticTime, double PessimisticTime, double ProbableTime)
+        {
+            this.ID = id;
+            this.OptimisticTime = OptimisticTime;
+            this.PessimisticTime = PessimisticTime;
+            this.ProbableTime = ProbableTime;
+            this.Duration = CalculateDuration();
+            this.Variance = CalculateVariance();
+        }
+
+        public double CalculateVariance()
+        {
+            Variance = (OptimisticTime + PessimisticTime) / 6;
+            return Variance;
+        }
+
+        public double CalculateDuration()
+        {
+            Duration = (OptimisticTime + 4 * ProbableTime + PessimisticTime) / 6;
+            return Duration;
+        }
     }
 }
