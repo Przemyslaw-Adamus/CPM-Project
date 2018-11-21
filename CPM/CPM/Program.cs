@@ -75,11 +75,11 @@ namespace CPM
                                     Console.ReadLine();
                                 }
                                 graph.CreateIncidentsModeActivities();
-                                //solver.LoadGraph(graph);
-                                //solver.CalculateGraphValues();
+                                solver.LoadGraph(graph);
+                                solver.CalculateGraphValues();
                                 graph.ShowGraph();
-                                //var cpp = solver.FindIncidentsCriticalPath();
-                                //solver.ShowCriticalPath(cpp);
+                                var cpp = solver.FindIncidentsCriticalPath();
+                                solver.ShowCriticalPath(cpp);
                                 Console.WriteLine("Press ENTER");
                                 Console.ReadLine();
                             }

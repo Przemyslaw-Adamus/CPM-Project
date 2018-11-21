@@ -90,7 +90,7 @@ namespace CPM
             List<Incident> removeIncidents = new List<Incident>();
             foreach (var inc in Incidents)
             {
-                if(id == inc.ID)
+                if (id == inc.ID)
                 {
                     removeIncidents.Add(inc);
                 }
@@ -99,7 +99,7 @@ namespace CPM
                     id = inc.ID;
                 }
             }
-            foreach(var remove in removeIncidents)
+            foreach (var remove in removeIncidents)
             {
                 Incidents.Remove(remove);
             }
@@ -124,8 +124,6 @@ namespace CPM
             //---------------------------------------------
         }
 
-
-
         private void LoadActivitiesModeActivities()
         {
             using (var streamReader = File.OpenText("Graf1.2.csv"))
@@ -136,41 +134,74 @@ namespace CPM
                 reader.Configuration.Delimiter = ";";
                 Activities = reader.GetRecords<Activity>().ToList();
             }
-
         }
 
         public void CreateIncidentsModeActivities()
         {
-            foreach(var incident in Incidents)
+            var incident = new Incident();
+            Incidents.Add(incident);       
+            foreach(var activity in Activities.Where(a => a.Children == null))
             {
-                foreach(var activity in Activities)
-                {
-                    if (activity.IdPrevious == null)
-                        activity.Children = Incidents.Single(i => i.ID == 0);
-                    else
-                    {
-                        foreach(var id in activity.IdPrevious)
-                        {
-                            var actual = Activities.Single(a => a.ID == id);
-                            activity.Parent.Incoming.Add(actual);
-                            actual.Children = actual.Parent;
-                        }
-                    }
-                }
+                activity.Children = incident;
+                incident.Incoming.Add(activity);
             }
         }
 
         public void NewActivity(Activity activity)
         {
             Activities.Add(activity);
-            if (activity.IdPrevious.Length == 0 || !Activities.Contains(activity)) // if Acitivities nie zawiera poprzednikow
+            if (activity.IdPrevious.Length == 0)
             {
-                var incident = new Incident();
-                Incidents.Add(incident);
-                incident.Outgoing.Add(activity);
-                activity.Parent = incident;
+                if (Incidents.Count == 0)
+                {
+                    var incident = new Incident();
+                    Incidents.Add(incident);
+                }
+                var firstIncident = Incidents.Single(i => i.ID == 0);
+                activity.Parent = firstIncident;
+                firstIncident.Outgoing.Add(activity);
             }
+
+            var withChildrens = new List<int>();
+            var withoutChildrens = new List<int>();
+            foreach (var id in activity.IdPrevious)
+            {
+                var tmp = Activities.Single(a => a.ID == id);
+                if (tmp.Children != null)
+                    withChildrens.Add(id);
+                else
+                    withoutChildrens.Add(id);
+            }
+            ProcessPreviousActivities(activity, withChildrens);
+            ProcessPreviousActivities(activity, withoutChildrens);
         }
 
+        private void ProcessPreviousActivities(Activity activity, List<int> ids)
+        {
+            foreach (var id in ids)
+            {
+                var current = Activities.Single(a => a.ID == id);
+
+                if (activity.Parent != null)
+                {
+                    current.Children = activity.Parent;
+                    current.Children.Incoming.Add(activity);
+                }
+                else if (current.Children != null)
+                {
+                    activity.Parent = current.Children;
+                    activity.Parent.Outgoing.Add(activity);
+                }
+                else //(current.Children == null && activity.Parent == null)
+                {
+                    var incident = new Incident();
+                    Incidents.Add(incident);
+                    current.Children = incident;
+                    incident.Incoming.Add(current);
+                    activity.Parent = incident;
+                    incident.Outgoing.Add(activity);
+                }
+            }
+        }
     }
 }
