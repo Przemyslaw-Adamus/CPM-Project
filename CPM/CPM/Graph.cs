@@ -185,7 +185,7 @@ namespace CPM
                 if (activity.Parent != null)
                 {
                     current.Children = activity.Parent;
-                    current.Children.Incoming.Add(activity);
+                    current.Children.Incoming.Add(current);
                 }
                 else if (current.Children != null)
                 {
